@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 
 # URL of the webpage containing the images
-url = "https://www.vogue.com/fashion-shows/fall-2023-menswear/saint-laurent/slideshow/collection#1"
+url = "https://www.vogue.com/fashion-shows/fall-2023-menswear/saint-laurent/slideshow/collection"
 
 # Send a request to the webpage and get the HTML content
 response = requests.get(url)
