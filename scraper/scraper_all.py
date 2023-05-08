@@ -42,7 +42,8 @@ import requests
 from bs4 import BeautifulSoup
 import os
 
-url = 'https://www.vogue.com/fashion-shows/fall-2023-menswear/saint-laurent/slideshow/collection#'
+# url = 'https://www.vogue.com/fashion-shows/fall-2023-menswear/saint-laurent/slideshow/collection#'
+url = 'https://www.vogue.com/fashion-shows/fall-2023-menswear/saint-laurent#review'
 
 response = requests.get(url)
 
