@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import os
 
-url = 'https://www.vogue.com/fashion-shows/fall-2023-menswear/saint-laurent#review'
+url = 'https://www.vogue.com/fashion-shows/spring-2022-menswear/saint-laurent'
 
 driver = webdriver.Chrome()
 driver.get(url)
@@ -45,16 +45,17 @@ for img in soup.find_all('img', class_='responsive-image__image'):
         image_urls.append(src)
 
 # create folder to save images
-if not os.path.exists('images'):
-    os.makedirs('images')
+if not os.path.exists('04_Saint_Laurent_SS22_mens'):
+    os.makedirs('04_Saint_Laurent_SS22_mens')
 
 # download and save images
 for i, url in enumerate(image_urls):
     response = requests.get(url)
-    filename = f"{i+1:02d}.jpg"
-    filepath = os.path.join('images', filename)
+    filename = f"saint_laurent_SS22_{i+1:02d}.jpg"
+    filepath = os.path.join('04_Saint_Laurent_SS22_mens', filename)
     with open(filepath, 'wb') as f:
         f.write(response.content)
         print(f"Saved {filename}")
 
 driver.quit()
+print('done')
