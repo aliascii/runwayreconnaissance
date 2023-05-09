@@ -37,7 +37,7 @@
 # <img alt="" class="ResponsiveImageContainer-dkDswF jdxiQR responsive-image__image" src="https://assets.vogue.com/photos/63c7533b3a32434f4bef5ab4/master/w_2560%2Cc_limit/00001-saint-laurent-fall-2023-menswear-credit-brand.jpg">
 # <img alt="" class="ResponsiveImageContainer-dkDswF jdxiQR responsive-image__image" src="https://assets.vogue.com/photos/63c753317022d35c31c7667b/master/w_2560%2Cc_limit/00002-saint-laurent-fall-2023-menswear-credit-brand.jpg">
 
-# THIS CODE WORKS BUT ONLY DOWNLOADS 1 IMG
+# THIS CODE WORKS BUT NEEDS SELENIUM TO AUTOMATE "LOAD MORE" Button
 import requests
 from bs4 import BeautifulSoup
 import os

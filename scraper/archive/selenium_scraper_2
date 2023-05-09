@@ -1,0 +1,48 @@
+import requests
+from bs4 import BeautifulSoup
+import os
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# set up Selenium webdriver
+driver = webdriver.Chrome()
+driver.get('https://www.vogue.com/fashion-shows/fall-2023-menswear/saint-laurent#review')
+
+# wait for the page to load
+wait = WebDriverWait(driver, 10)
+wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'responsive-image__image')))
+
+# keep clicking the "Load More" button until all images are displayed
+while True:
+    try:
+        load_more_button = driver.find_element_by_xpath('//span[contains(text(),"Load More")]')
+        load_more_button.click()
+        wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'responsive-image__image')))
+    except:
+        break
+
+# scrape all image urls
+soup = BeautifulSoup(driver.page_source, 'html.parser')
+image_urls = []
+for img in soup.find_all('img', class_='responsive-image__image'):
+    src = img.get('src')
+    if "https://assets.vogue.com/photos/" in src and src.endswith(".jpg"):
+        image_urls.append(src)
+
+# create folder to save images
+if not os.path.exists('images'):
+    os.makedirs('images')
+
+# download and save images
+for i, url in enumerate(image_urls):
+    response = requests.get(url)
+    filename = f"{i+1:02d}.jpg"
+    filepath = os.path.join('images', filename)
+    with open(filepath, 'wb') as f:
+        f.write(response.content)
+        print(f"Saved {filename}")
+
+# quit webdriver
+driver.quit()
